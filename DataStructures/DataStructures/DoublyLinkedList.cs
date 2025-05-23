@@ -21,6 +21,8 @@ namespace DataStructures
         private Node? _tail;
         private int _count;
 
+        public int Count => _count;
+
         public void AddFirst(T value)
         {
             var newNode = new Node(value);
@@ -94,10 +96,10 @@ namespace DataStructures
             return false;
         }
 
-        // TODO: Modify using _tail
+        // TODO: Modify using _tail DONE
         public bool Contains(T value)
         {
-            var current = _head;
+            var current = _tail;
 
             while (current != null)
             {
@@ -106,13 +108,31 @@ namespace DataStructures
                     return true;
                 }
 
-                current = current.Next;
+                current = current.Prev;
             }
 
             return false;
         }
 
-        // TODO: Modify using _tail
+        // Using head
+        //public bool Contains(T value)
+        //{
+        //    var current = _head;
+
+        //    while (current != null)
+        //    {
+        //        if (current.Value.Equals(value))
+        //        {
+        //            return true;
+        //        }
+
+        //        current = current.Next;
+        //    }
+
+        //    return false;
+        //}
+
+        // TODO: Modify using _tail DONE
         public T Get(int index)
         {
             if (index < 0 || index >= _count)
@@ -120,31 +140,63 @@ namespace DataStructures
                 throw new ArgumentOutOfRangeException(nameof(index));
             }
 
-            var current = _head;
+            var current = _tail;
 
-            for (int i = 0; i < index; i++)
+            for (int i = _count - 1; i > index; i--)
             {
-                current = current!.Next;
+                current = current!.Prev;
             }
 
             return current!.Value;
         }
 
-        // TODO: Complete the to array method using head
+        //Using Head
+        //public T Get(int index)
+        //{
+        //    if (index < 0 || index >= _count)
+        //    {
+        //        throw new ArgumentOutOfRangeException(nameof(index));
+        //    }
+
+        //    var current = _head;
+
+        //    for (int i = 0; i < index; i++)
+        //    {
+        //        current = current!.Next;
+        //    }
+
+        //    return current!.Value;
+        //}
+
+        // TODO: Complete the to array method using head DONE
         public T[] ToArray()
         {
             var result = new T[_count];
-            // Turn to array the linked list
+            // Turn to array the linked list DONE
+            var current = _head;
+            var index = 0;
 
+            while (current != null)
+            {
+                result[index++] = current.Value;
+                current = current.Next;
+            }
             return result;
         }
 
-        // TODO: Complete the to reversed array using tail
+        // TODO: Complete the to reversed array using tail DONE
         public T[] ToReversedArray()
         {
             var result = new T[_count];
-            // Turn to array the linked list but start from the tail
+            // Turn to array the linked list but start from the tail DONE
+            var current = _tail;
+            var index = 0;
 
+            while (current != null)
+            {
+                result[index++] = current.Value;
+                current = current.Prev;
+            }
             return result;
         }
     }

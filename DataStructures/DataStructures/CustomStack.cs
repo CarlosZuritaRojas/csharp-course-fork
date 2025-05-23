@@ -54,9 +54,14 @@
 
         public T[] ToArray()
         {
-            // TODO: Convertir a array
-
-            return default!;
+            // TODO: Convertir a array DONE
+            T[] array = new T[_count];
+            var index = 0;
+            while (_top != null)
+            {
+                array[index++] = this.Pop();
+            }
+            return array;
         }
     }
 }

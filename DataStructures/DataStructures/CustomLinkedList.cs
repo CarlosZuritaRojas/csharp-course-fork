@@ -130,8 +130,15 @@
         public T[] ToArray()
         {
             var result = new T[_count];
+            var index = 0;
             // TODO: Turn to array the linked list
+            var current = _head;
 
+            while (current != null)
+            {
+                result[index++] = current.Value;
+                current = current.Next;
+            }
             return result;
         }
     }

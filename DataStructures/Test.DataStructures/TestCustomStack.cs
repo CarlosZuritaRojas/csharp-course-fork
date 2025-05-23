@@ -59,7 +59,9 @@
         [Fact]
         public void IsEmpty_StackIsEmptyOnCreation()
         {
-            // TODO: Complete test
+            // TODO: Complete test DONE
+            var stack = new CustomStack<char>();
+            Assert.True(stack.IsEmpty());
         }
 
         [Fact]
@@ -73,7 +75,10 @@
         [Fact]
         public void Pop_ShouldThrow_WhenEmpty()
         {
-            // TODO: Complete test
+            // TODO: Complete test DONE
+            var stack = new CustomStack<char>();
+            
+            Assert.Throws<InvalidOperationException> (() => stack.Pop());
         }
 
         [Fact]
@@ -84,7 +89,8 @@
             stack.Push('2');
             stack.Push('3');
 
-            // Assert.Equal(new[] {'3', '2', '1'}, result);
+            var result = stack.ToArray();
+            Assert.Equal(new[] {'3', '2', '1'}, result);
         }
     }
 }
