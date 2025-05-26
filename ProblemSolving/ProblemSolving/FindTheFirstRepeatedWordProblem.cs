@@ -1,4 +1,7 @@
-﻿namespace ProblemSolving
+﻿using System.Diagnostics;
+using System.Linq;
+
+namespace ProblemSolving
 {
     /// <summary>
     /// Given a string represeting a paragraph, find the first word
@@ -18,5 +21,29 @@
     /// </summary>
     public class FindTheFirstRepeatedWordProblem
     {
+        private readonly Dictionary<string, int> foundWords = new();
+
+        public string? Process(string paragraph)
+        {
+            List<string> words = paragraph.ToLower()
+                                            .Split(" ")
+                                            .Select(x => x.Trim(','))
+                                            .ToList();
+
+            var counter = 0;
+            while (words.Count > counter)
+            {
+                if (foundWords.TryGetValue(words[counter], out int value) && value == 1)
+                {
+                    return words[counter];
+                }
+
+                foundWords[words[counter]] = 1;
+                counter++;
+            }
+
+            Console.WriteLine("No repeated words found");
+            return null;
+        }
     }
 }

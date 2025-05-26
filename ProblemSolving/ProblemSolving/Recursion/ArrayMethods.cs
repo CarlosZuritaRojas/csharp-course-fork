@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ProblemSolving.Recursion;
 
-namespace ProblemSolving.Recursion
+// TODO: Add unit testing DONE
+public static class ArrayMethods
 {
-    // TODO: Add unit testing
-    public static class ArrayMethods
+    public static int Sum(int[] numbers, int index = 0)
     {
-        public static int Sum(int[] numbers, int index = 0)
+        if (index == numbers.Length)
         {
-            if (index == numbers.Length)
-            {
-                return 0;
-            }
-
-            return numbers[index] + Sum(numbers, index + 1);
+            return 0;
         }
+
+        return numbers[index] + Sum(numbers, index + 1);
     }
 }
