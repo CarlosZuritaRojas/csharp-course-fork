@@ -31,6 +31,4 @@ public class TestInvoiceCalculator
     Assert.Equal(600, total);
     Assert.Equal(200, average);
   }
-
-  // TODO: Add negative test cases
 }
