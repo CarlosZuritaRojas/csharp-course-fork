@@ -3,16 +3,18 @@ using ProductExportApp.Models;
 
 namespace ProductExportApp.Cli;
 
-public class ProductExportCli(IExporterFactory exporterFactory)
+public class ProductExportCli(IExporterFactory exporterFactory, IFormatTypeValidator validator)
 {
   private readonly IExporterFactory _exporterFactory = exporterFactory;
+  private readonly IFormatTypeValidator _validator = validator;
 
   public void Run(string[] args)
   {
-    var format = args.FirstOrDefault() ?? "json";
+    var format = args.FirstOrDefault() ?? "Json";
     var products = SampleData();
-    // TODO: Implement format type validation
-    var output = _exporterFactory.Export(products, Enum.Parse<FormatType>(format, true));
+    // TODO: Implement format type validation DONE
+    var validFormat = _validator.ValidateFormatType(format);
+    var output = _exporterFactory.Export(products, validFormat);
     Console.WriteLine(output);
   }
 

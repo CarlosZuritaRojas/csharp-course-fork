@@ -29,6 +29,95 @@ public class TestCsvExporter
 
     Assert.Equal(expected, result);
   }
-  
-  // TODO: Add tests for the other exporter types.
+
+    // TODO: Add tests for the other exporter types. DONE
+    [Fact]
+    public void Export_ProducesJsonFormatExport()
+    {
+        var exporter = new JsonExporter();
+
+        var result = exporter.Export(_products);
+
+        var expected = $$"""
+        [
+          {
+            "Id": 1,
+            "Name": "Laptop",
+            "Price": 7999.99,
+            "Category": "Electronics"
+          },
+          {
+            "Id": 2,
+            "Name": "Desk",
+            "Price": 4999.99,
+            "Category": "Furniture"
+          },
+          {
+            "Id": 3,
+            "Name": "Fork",
+            "Price": 2999.99,
+            "Category": "Kitchen"
+          }
+        ]
+        """;
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
+    public void Export_ProducesYamlFormatExport()
+    {
+        var exporter = new YamlExporter();
+
+        var result = exporter.Export(_products);
+
+        var expected = $$"""
+        - Id: 1
+          Name: Laptop
+          Price: 7999.99
+          Category: Electronics
+        - Id: 2
+          Name: Desk
+          Price: 4999.99
+          Category: Furniture
+        - Id: 3
+          Name: Fork
+          Price: 2999.99
+          Category: Kitchen
+
+        """;
+
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
+    public void Export_ProducesXMLFormatExport()
+    {
+        var exporter = new XmlExporter();
+
+        var result = exporter.Export(_products);
+
+        var expected = $$""""
+        <Products>
+          <Product id="1">
+            <Name>Laptop</Name>
+            <Price>7999.99</Price>
+            <Category>Electronics</Category>
+          </Product>
+          <Product id="2">
+            <Name>Desk</Name>
+            <Price>4999.99</Price>
+            <Category>Furniture</Category>
+          </Product>
+          <Product id="3">
+            <Name>Fork</Name>
+            <Price>2999.99</Price>
+            <Category>Kitchen</Category>
+          </Product>
+        </Products>
+
+        """";
+
+        Assert.Equal(expected, result);
+    }
 }
