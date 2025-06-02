@@ -1,21 +1,34 @@
 using System.Text.Json;
 using PaymentApp.Interfaces;
 using PaymentApp.Models;
+using PaymentApp.Services;
 
 namespace PaymentApp.Cli;
 
-public class PaymentCli(IPaymentRouter paymentRouter)
+public class PaymentCli(IPaymentRouter paymentRouter, IPaymentValidator paymentValidator)
 {
   private readonly IPaymentRouter _paymentRouter = paymentRouter;
+    private readonly IPaymentValidator _paymentValidator = paymentValidator;
 
   public void Run(string[] args)
   {
-    // TODO: Implement validation for input arguments
-    var json = args.Length > 0 ? args[0] : SampleData();
+    // TODO: Implement validation for input arguments DONE
+    var json = args.Length > 0 ? args[0] : throw new ArgumentException("""
+        Arguments are empty we need an input as json with the next structure 
+        [
+            {
+              "id": string,
+              "method": "bitcoin|creditcard|paypal",
+              "amount": int,
+              "reference": string
+            }
+        ]
+        """);
     var orders = JsonSerializer.Deserialize<List<Order>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
 
     foreach (var order in orders)
     {
+      _paymentValidator.ValidatePayment(order);
       _paymentRouter.Charge(order.Method, order.Amount, order.Reference);
     }
 
@@ -25,10 +38,10 @@ public class PaymentCli(IPaymentRouter paymentRouter)
     _paymentRouter.TryRefund(cancelledOrder.Method, cancelledOrder.Amount, cancelledOrder.Reference);
   }
 
-  // TODO: Delete this method and add validations
-  public static string SampleData()
-  {
-    return """
+    // TODO: Delete this method and add validations DONE
+   /* public static string SampleData()
+    {
+        return """
     [
       {
         "id": "A1",
@@ -50,5 +63,5 @@ public class PaymentCli(IPaymentRouter paymentRouter)
       }
     ]
     """;
-  }
+    }*/
 }

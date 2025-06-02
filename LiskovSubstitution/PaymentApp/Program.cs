@@ -14,6 +14,7 @@ services.AddSingleton<IRefunder, PayPalPayment>();
 services.AddSingleton<ICharger, BitcoinPayment>();
 
 services.AddSingleton<IPaymentRouter, PaymentRouter>();
+services.AddSingleton<IPaymentValidator, PaymentValidator>();
 services.AddSingleton<PaymentCli>();
 
 using var host = builder.Build();

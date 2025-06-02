@@ -15,18 +15,30 @@ public class PaymentRouter(IEnumerable<ICharger> chargers, IEnumerable<IRefunder
   // TODO: Enhance this method apply simple Single Responsibility Principle
   public bool TryRefund(string method, decimal amount, string reference)
   {
-    var isRefunderAvailable = _refunders.TryGetValue(method, out var refunder);
+    var refunder = GetRefunder(method);
 
-    if (isRefunderAvailable)
+    if (refunder is not null)
     {
-      refunder!.Refund(amount, reference);
+      ProcessRefund(refunder, amount, reference);
     }
     else
     {
       ShowRefundNotSupportedMessage(method);
+      return false;
     }
 
-    return isRefunderAvailable;
+    return true;
+  }
+
+  private IRefunder? GetRefunder(string method)
+  {
+      _refunders.TryGetValue(method, out var refunder);
+      return refunder;
+  }
+    
+  private static void ProcessRefund(IRefunder refunder, decimal amount, string reference)
+  {
+      refunder.Refund(amount, reference);
   }
 
   private static void ShowRefundNotSupportedMessage(string method)
