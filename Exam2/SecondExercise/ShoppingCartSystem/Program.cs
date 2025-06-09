@@ -4,7 +4,7 @@ public class Program
 {
   static void Main()
   {
-    var cart = new ShoppingCart();
+    var cart = new ShoppingCart(new DefaultDiscountStrategy(), new DefaultShippingCalculator());
 
     var laptop = new PhysicalProduct
     {
@@ -34,6 +34,12 @@ public class Program
     cart.AddItem(mouse, 2);
 
     cart.DisplayCart();
-    cart.Checkout();
-  }
+
+    var checkoutService = new CheckoutService();
+    checkoutService.Checkout(cart.Items);
+
+    Console.WriteLine($"\nTotal Amount: ${cart.CalculateTotal():F2}");
+    Console.WriteLine("Payment processed successfully!");
+    Console.WriteLine("Order confirmation sent to customer email.");
+    }
 }
