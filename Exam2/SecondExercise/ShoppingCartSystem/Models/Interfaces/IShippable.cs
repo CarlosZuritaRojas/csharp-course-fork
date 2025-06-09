@@ -1,4 +1,4 @@
-﻿namespace ShoppingCartSystem;
+﻿namespace ShoppingCartSystem.Models.Interfaces;
 
 public interface IShippable
 {

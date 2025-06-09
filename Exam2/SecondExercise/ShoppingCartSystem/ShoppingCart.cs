@@ -1,19 +1,16 @@
+using ShoppingCartSystem.Models.Interfaces;
+using ShoppingCartSystem.Processors.Interfaces;
+
 namespace ShoppingCartSystem;
 
-public class ShoppingCart
+public class ShoppingCart(IDiscountStrategy discountStrategy, IShippingCalculator shippingCalculator) : IShoppingCart
 {
   private readonly List<IProduct> _items = [];
-  private readonly IDiscountStrategy _discountStrategy;
-  private readonly IShippingCalculator _shippingCalculator;
+  private readonly IDiscountStrategy _discountStrategy = discountStrategy;
+  private readonly IShippingCalculator _shippingCalculator = shippingCalculator;
 
-  public List<IProduct> Items => _items;
+  public IEnumerable<IProduct> Items => _items;
 
-  public ShoppingCart(IDiscountStrategy discountStrategy, IShippingCalculator shippingCalculator)
-  {
-      _discountStrategy = discountStrategy;
-      _shippingCalculator = shippingCalculator;
-  }
-  
 
   public void AddItem(IProduct product, int quantity = 1)
   {

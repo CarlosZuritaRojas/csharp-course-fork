@@ -1,5 +1,7 @@
-﻿
-namespace ShoppingCartSystem;
+﻿using ShoppingCartSystem.Models.Interfaces;
+using ShoppingCartSystem.Processors.Interfaces;
+
+namespace ShoppingCartSystem.Processors;
 
 public class DefaultShippingCalculator : IShippingCalculator
 {

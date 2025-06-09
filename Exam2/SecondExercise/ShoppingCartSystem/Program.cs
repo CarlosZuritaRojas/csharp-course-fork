@@ -1,45 +1,20 @@
-﻿namespace ShoppingCartSystem;
+﻿using ShoppingCartSystem.Cli;
+using ShoppingCartSystem.Models;
+using ShoppingCartSystem.Processors;
 
-public class Program
-{
-  static void Main()
-  {
-    var cart = new ShoppingCart(new DefaultDiscountStrategy(), new DefaultShippingCalculator());
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using ShoppingCartSystem.Processors.Interfaces;
+using ShoppingCartSystem;
 
-    var laptop = new PhysicalProduct
-    {
-      Name = "Gaming Laptop",
-      Price = 1200,
-      Stock = 5,
-      Weight = 2.5m
-    };
+var builder = Host.CreateApplicationBuilder(args);
+var services = builder.Services;
 
-    var ebook = new DigitalProduct
-    {
-      Name = "Programming Guide",
-      Price = 29.99m,
-      DownloadUrl = "http://example.com/download/book.pdf"
-    };
+services.AddSingleton<IDiscountStrategy, DefaultDiscountStrategy>();
+services.AddSingleton<IShippingCalculator, DefaultShippingCalculator>();
+services.AddSingleton<IShoppingCart, ShoppingCart>();
 
-    var mouse = new PhysicalProduct
-    {
-      Name = "Wireless Mouse",
-      Price = 25,
-      Stock = 10,
-      Weight = 0.2m
-    };
+services.AddSingleton<ShoppingCli>();
 
-    cart.AddItem(laptop);
-    cart.AddItem(ebook);
-    cart.AddItem(mouse, 2);
-
-    cart.DisplayCart();
-
-    var checkoutService = new CheckoutService();
-    checkoutService.Checkout(cart.Items);
-
-    Console.WriteLine($"\nTotal Amount: ${cart.CalculateTotal():F2}");
-    Console.WriteLine("Payment processed successfully!");
-    Console.WriteLine("Order confirmation sent to customer email.");
-    }
-}
+using var host = builder.Build();
+host.Services.GetRequiredService<ShoppingCli>().Run();

@@ -1,4 +1,6 @@
-﻿namespace ShoppingCartSystem;
+﻿using ShoppingCartSystem.Models.Interfaces;
+
+namespace ShoppingCartSystem.Processors.Interfaces;
 
 public interface IShippingCalculator
 {
