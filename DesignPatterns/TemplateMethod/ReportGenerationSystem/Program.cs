@@ -1,5 +1,7 @@
-﻿using ReportGenerationSystem.Services;
+﻿using ReportGenerationSystem.Enums;
+using ReportGenerationSystem.Services;
 
 var reportService = new ReportService();
 reportService.GenerateAllReports();
-reportService.GenerateAllReportsInFormat("CSV");
+reportService.GenerateAllReportsInFormat(FormatType.Csv);
+reportService.GenerateAllReportsInFormat(FormatType.Json);

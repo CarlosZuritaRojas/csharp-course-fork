@@ -1,3 +1,4 @@
+using ReportGenerationSystem.Enums;
 using ReportGenerationSystem.Factories;
 using ReportGenerationSystem.ReportGenerators;
 using ReportGenerationSystem.Templates;
@@ -21,8 +22,8 @@ public class ReportService
     }
   }
 
-  // TODO: This should be an enum 'format'
-  public void GenerateAllReportsInFormat(string format)
+  // TODO: This should be an enum 'format' DONE
+  public void GenerateAllReportsInFormat(FormatType format)
   {
     var strategy = FormatStrategyFactory.CreateStrategy(format);
 

@@ -1,3 +1,4 @@
+using ReportGenerationSystem.Enums;
 using ReportGenerationSystem.Interfaces;
 using ReportGenerationSystem.Strategies;
 
@@ -26,8 +27,8 @@ public abstract class ReportGenerator(IReportFormatStrategy? formatStrategy = nu
     return formattedReport;
   }
 
-  // TODO: Convert into enum (the report type)
-  protected abstract string GetReportType();
+  // TODO: Convert into enum (the report type) DONE
+  protected abstract ReportType GetReportType();
   protected abstract string[] FectchData();
   protected abstract List<string> ProcessedData(string[] rawData);
   // protected abstract string FormatReport(List<string> processedData);
@@ -46,6 +47,7 @@ public abstract class ReportGenerator(IReportFormatStrategy? formatStrategy = nu
   protected virtual void SaveReport(string report)
   {
     Console.WriteLine($"💾 Saving {GetReportType()} report to file...");
+    Console.Write(report);
     Console.WriteLine($"Report saved successfully: {report.Length} characters\n");
   }
 }

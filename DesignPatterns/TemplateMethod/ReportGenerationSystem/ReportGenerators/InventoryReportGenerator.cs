@@ -1,3 +1,4 @@
+using ReportGenerationSystem.Enums;
 using ReportGenerationSystem.Interfaces;
 using ReportGenerationSystem.Templates;
 
@@ -5,7 +6,7 @@ namespace ReportGenerationSystem.ReportGenerators;
 
 public class InventoryReportGenerator(IReportFormatStrategy? formatStrategy = null) : ReportGenerator(formatStrategy)
 {
-  protected override string GetReportType() => "Inventory";
+  protected override ReportType GetReportType() => ReportType.Inventory;
 
   protected override string[] FectchData()
   {

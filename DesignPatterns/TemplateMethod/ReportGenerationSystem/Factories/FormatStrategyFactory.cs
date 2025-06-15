@@ -1,3 +1,4 @@
+using ReportGenerationSystem.Enums;
 using ReportGenerationSystem.Interfaces;
 using ReportGenerationSystem.Strategies;
 
@@ -5,20 +6,21 @@ namespace ReportGenerationSystem.Factories;
 
 public static class FormatStrategyFactory
 {
-  // TODO: Implement the missing format (json)
-  public static IReportFormatStrategy CreateStrategy(string formatName)
+  // TODO: Implement the missing format (json) DONE
+  public static IReportFormatStrategy CreateStrategy(FormatType formatName)
   {
-    return formatName.ToUpper() switch
+    return formatName switch
     {
-      "HTML" => new HTMLFormatStrategy(),
-      "CSV" => new CSVFormatStrategy(),
+      FormatType.Html => new HTMLFormatStrategy(),
+      FormatType.Csv => new CSVFormatStrategy(),
+      FormatType.Json => new JSONFormatStrategy(),
       _ => throw new ArgumentException($"Unknown format: {formatName}")
     };
   }
 
-  // TODO: Find a cleaner way to do this
-  public static List<string> GetAvailableFormats()
+  // TODO: Find a cleaner way to do this DONE
+  public static List<FormatType> GetAvailableFormats()
   {
-    return ["HTML", "CSV", "JSON"];
+     return [.. Enum.GetValues<FormatType>()];
   }
 }
