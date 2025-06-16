@@ -1,3 +1,4 @@
+using CoffeeShop.Entities;
 using CoffeeShop.Interfaces;
 
 namespace CoffeeShop.Decorator;
@@ -41,10 +42,11 @@ public class SugarDecorator(ICoffee coffee, int packets, string sugarType) : Cof
     return _coffee.GetCalories() + (caloriesPerPacket * _packets);
   }
 
-  public override List<string> GetIngredients()
+  public override List<Ingredient> GetIngredients()
   {
     var ingredients = _coffee.GetIngredients();
-    ingredients.Add($"{_sugarType} Sugar ({_packets}x)");
+    ingredients.Add(new Sugar());
+    //ingredients.Add($"{_sugarType} Sugar ({_packets}x)");
 
     return ingredients;
   }

@@ -30,6 +30,8 @@ var result2 = coffe2.GetDescription();
 coffe2 = new SugarDecorator(coffe2, 2, "White");
 
 Console.WriteLine(result2);
+coffeeShop.PrintReceipt(coffe1);
+coffeeShop.PrintReceipt(coffe2);
 
 /*
 BENEFITS OF DECORATOR PATTERN:

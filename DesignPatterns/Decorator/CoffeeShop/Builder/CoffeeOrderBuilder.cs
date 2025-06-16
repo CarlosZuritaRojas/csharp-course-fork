@@ -16,7 +16,7 @@ public class CoffeeOrderBuilder(ICoffee baseCoffee)
     return this;
   }
 
-  public CoffeeOrderBuilder WithMilk(string milkType = "Rugular")
+  public CoffeeOrderBuilder WithMilk(string milkType = "Regular")
   {
     _coffee = new MilkDecorator(_coffee, milkType);
 

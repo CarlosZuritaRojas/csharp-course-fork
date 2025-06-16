@@ -1,3 +1,4 @@
+using CoffeeShop.Entities;
 using CoffeeShop.Interfaces;
 
 namespace CoffeeShop.Decorator;
@@ -36,10 +37,10 @@ public class MilkDecorator(ICoffee coffee, string milkType) : CoffeeDecorator(co
     return _coffee.GetCalories() + _additionalCalories;
   }
 
-  public override List<string> GetIngredients()
+  public override List<Ingredient> GetIngredients()
   {
     var ingredients = _coffee.GetIngredients();
-    ingredients.Add($"{_milkType} Milk");
+    ingredients.Add(new Milk());
 
     return ingredients;
   }

@@ -1,3 +1,4 @@
+using CoffeeShop.Entities;
 using CoffeeShop.Interfaces;
 
 namespace CoffeeShop.Decorator;
@@ -12,5 +13,5 @@ public abstract class CoffeeDecorator(ICoffee coffee) : ICoffee
   public virtual decimal GetCost() => _coffee.GetCost();
   public virtual int GetCalories() => _coffee.GetCalories();
   public virtual string GetSize() => _coffee.GetSize();
-  public virtual List<string> GetIngredients() => _coffee.GetIngredients();
+  public virtual List<Ingredient> GetIngredients() => _coffee.GetIngredients();
 }
