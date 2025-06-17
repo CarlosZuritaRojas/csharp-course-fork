@@ -1,8 +1,9 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace CrossPlatform.Interfaces;
 
 public interface ICheckBox : IComponent
 {
-  void Check(bool isChecked);
-  bool IsChecked();
+  bool IsChecked { get; set; }
   string GetStyle();
 }

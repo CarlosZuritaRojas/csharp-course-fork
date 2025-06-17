@@ -1,27 +1,17 @@
 using CrossPlatform.Interfaces;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace CrossPlatform.Components;
 
-// TODO: Complete implement interface
+// TODO: Complete implement interface DONE
 public sealed class LinuxCheckBox : ICheckBox
 {
-  public void Check(bool isChecked)
-  {
-    throw new NotImplementedException();
-  }
+  private bool _isChecked;
+  public bool IsChecked { get => _isChecked; set { _isChecked = value; } }
 
-  public string GetStyle()
-  {
-    throw new NotImplementedException();
-  }
-
-  public bool IsChecked()
-  {
-    throw new NotImplementedException();
-  }
-
+  public string GetStyle() => $"{this.GetType().Name} Unix style";
   public void Render()
   {
-    throw new NotImplementedException();
+    Console.WriteLine($"Rendering the {this.GetType().Name} CheckBox Component");
   }
 }

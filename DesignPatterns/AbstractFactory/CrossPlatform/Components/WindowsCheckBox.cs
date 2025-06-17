@@ -2,26 +2,15 @@ using CrossPlatform.Interfaces;
 
 namespace CrossPlatform.Components;
 
-// TODO: Complete implement interface
+// TODO: Complete implement interface DONE
 public sealed class WindowsCheckBox : ICheckBox
 {
-  public void Check(bool isChecked)
-  {
-    throw new NotImplementedException();
-  }
-
-  public string GetStyle()
-  {
-    throw new NotImplementedException();
-  }
-
-  public bool IsChecked()
-  {
-    throw new NotImplementedException();
-  }
+  private bool _isChecked;
+  public bool IsChecked { get => _isChecked; set { _isChecked = value; } }
+  public string GetStyle() => $"{this.GetType().Name} Winforms style";
 
   public void Render()
   {
-    throw new NotImplementedException();
+    Console.WriteLine($"Rendering the {this.GetType().Name} CheckBox Component");
   }
 }

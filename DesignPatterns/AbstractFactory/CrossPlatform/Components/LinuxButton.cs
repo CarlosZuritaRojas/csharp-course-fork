@@ -2,21 +2,18 @@ using CrossPlatform.Interfaces;
 
 namespace CrossPlatform.Components;
 
-// TODO: Complete implement interface
+// TODO: Complete implement interface DONE
 public sealed class LinuxButton : IButton
 {
   public void Click()
   {
-    throw new NotImplementedException();
+     Console.WriteLine($"{this.GetType().Name} clicked redirect us to the next form");
   }
 
-  public string GetTheme()
-  {
-    throw new NotImplementedException();
-  }
+  public string GetTheme() => "Dark bolder green";
 
   public void Render()
   {
-    throw new NotImplementedException();
+    Console.WriteLine($"Rendering {this.GetType().Name} with highlighted label");
   }
 }

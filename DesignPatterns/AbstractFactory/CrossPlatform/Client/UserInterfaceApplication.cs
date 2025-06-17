@@ -1,10 +1,10 @@
 using CrossPlatform.Interfaces;
+using System.Diagnostics.Metrics;
 
 namespace CrossPlatform.Client;
 
-// TODO: Use the client and enhance the creation for user interfaces
-public class UserInterfaceApplication(
-  IUserInterfaceComponentFactory uiFactory)
+// TODO: Use the client and enhance the creation for user interfaces DONE
+public class UserInterfaceApplication(IUserInterfaceComponentFactory uiFactory) : IUserInterfaceApplication
 {
   private readonly IUserInterfaceComponentFactory _uiFactory = uiFactory ?? throw new ArgumentNullException(nameof(uiFactory));
   private readonly List<IButton> _buttons = [];
@@ -13,23 +13,24 @@ public class UserInterfaceApplication(
 
   public void CreateLoginForm()
   {
-    // Create username field
+    AddTextBox("Enter username");
+    AddTextBox("*********");
+    AddButton();
+    Console.WriteLine("Login form created succesfully");
+  }
+
+  private void AddTextBox(string text)
+  {
     var usernameTextBox = _uiFactory.CreateTextBox();
     usernameTextBox.Render();
-    usernameTextBox.SetText("Enter username");
+    usernameTextBox.SetText(text);
     _textBoxes.Add(usernameTextBox);
+  }
 
-    // Create password field
-    var passwordTextBox = _uiFactory.CreateTextBox();
-    passwordTextBox.Render();
-    passwordTextBox.SetText("********");
-    _textBoxes.Add(passwordTextBox);
-
-    // Create login button
-    var loginButton = _uiFactory.CreateButton();
-    loginButton.Render();
-    _buttons.Add(loginButton);
-
-    Console.WriteLine("Login form created succesfully");
+  private void AddButton()
+  {
+    var button = _uiFactory.CreateButton();
+    button.Render();
+    _buttons.Add(button);
   }
 }

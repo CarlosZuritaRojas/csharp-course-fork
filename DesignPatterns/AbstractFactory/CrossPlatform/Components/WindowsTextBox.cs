@@ -5,23 +5,17 @@ namespace CrossPlatform.Components;
 // TODO: Complete implement interface
 public sealed class WindowsTextBox : ITextBox
 {
-  public string GetFont()
-  {
-    throw new NotImplementedException();
-  }
+  public string GetFont() => "Arial";
 
-  public string GetText()
-  {
-    throw new NotImplementedException();
-  }
+  public string GetText() => $"Get {this.GetType().Name} from basic Text component";
 
   public void Render()
   {
-    throw new NotImplementedException();
+     Console.WriteLine($"Rendering {this.GetType().Name} Component");
   }
 
   public void SetText(string text)
   {
-    throw new NotImplementedException();
+     Console.WriteLine($"Setting {text} text in {this.GetType().Name} Component");
   }
 }

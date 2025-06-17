@@ -5,23 +5,17 @@ namespace CrossPlatform.Components;
 // TODO: Complete implement interface
 public sealed class MacOSTextBox : ITextBox
 {
-  public string GetFont()
-  {
-    throw new NotImplementedException();
-  }
+  public string GetFont() => "New Times Roman";
 
-  public string GetText()
-  {
-    throw new NotImplementedException();
-  }
+  public string GetText() => $"Get {this.GetType().Name} text from the Mac label";
 
   public void Render()
   {
-    throw new NotImplementedException();
+     Console.WriteLine($"Rendering {this.GetType().Name} Component");
   }
 
   public void SetText(string text)
   {
-    throw new NotImplementedException();
+      Console.WriteLine($"Setting {text} text in {this.GetType().Name} Component");
   }
 }

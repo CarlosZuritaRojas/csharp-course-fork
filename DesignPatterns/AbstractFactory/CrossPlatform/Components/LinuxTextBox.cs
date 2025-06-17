@@ -2,26 +2,20 @@ using CrossPlatform.Interfaces;
 
 namespace CrossPlatform.Components;
 
-// TODO: Complete implement interface
+// TODO: Complete implement interface DONE
 public sealed class LinuxTextBox : ITextBox
 {
-  public string GetFont()
-  {
-    throw new NotImplementedException();
-  }
+  public string GetFont() => "Sans-Seriff";
 
-  public string GetText()
-  {
-    throw new NotImplementedException();
-  }
-
+  public string GetText() => "Text from Inner text property";
+  
   public void Render()
   {
-    throw new NotImplementedException();
+      Console.WriteLine($"Rendering {this.GetType().Name} Component");
   }
 
   public void SetText(string text)
   {
-    throw new NotImplementedException();
+      Console.WriteLine($"Setting {text} text in {this.GetType().Name} Component");
   }
 }
